@@ -17,6 +17,7 @@ to access members of a strcut through a pointer use the arrow operator.
 
 //Function Prototypes
 void print_list(node_t * head);
+void add(node_t * head, int val);
 
 int main(void){
 
@@ -42,6 +43,11 @@ int main(void){
 
     print_list(head);
 
+    add(head, 5);
+    add(head, 6);
+
+    print_list(head);
+
     /*
     //updates the current postion of our main pointer to the new pointer just created.
     head = head->next;
@@ -52,7 +58,7 @@ int main(void){
 void print_list(node_t* head){
     node_t* current = head;
 
-    while(current != NULL){
+    while(current->next != NULL){
         //Prints the value at current postion
         printf("%d\n",current->value);
         //sets the current pointer to the next item in the linked list
@@ -61,3 +67,18 @@ void print_list(node_t* head){
     }
 
 }
+
+void add(node_t * head, int val){
+    node_t* current = head;
+
+    //if current is not at the end of the list, parse through till you find the last element.
+    while(current->next != NULL){
+        current = current->next;
+    }
+    //Creates and adds the new node.
+    current->next = (node_t*) malloc(sizeof(node_t));
+    current->next->value = val;
+    current->next->next = NULL;
+}
+
+//void pop(node_t** head)
