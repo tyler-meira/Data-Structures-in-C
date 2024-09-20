@@ -8,29 +8,56 @@ to access members of a strcut through a pointer use the arrow operator.
 
 */
 
-//Linked List Structure
-    typedef struct LinkedList{
+//Linked List Struct
+    typedef struct node{
         int value;
-        int *next;
-    }linkedlist;
+        struct node * next;
+    }node_t;
 
-    //Creates the structure object 
-    linkedlist one;
-    linkedlist two;
+
+//Function Prototypes
+void print_list(node_t * head);
 
 int main(void){
 
-    //Creates a ptr that points the structure object
-    linkedlist *ptr = &one;
-    linkedlist *ptr2 = &two;
+    //Creates pointers for the node struct
+    node_t* head;
+    node_t* one;
+
+    //Assigns memory for those nodes, use size of function since it returns the amount of bytes something is.
+    one = (node_t*) malloc(sizeof(node_t));
+    head = (node_t*) malloc(sizeof(node_t));
+
+    //Initialize head node, with arrow operator since head is a pointer.
+    head->value = 1;
+    head->next = NULL;
+
     
-    ptr->value = 5;
+    //Create the next node after head, by assigning the next variable to a memory location of the next structure.
+    head->next = (node_t*) malloc(sizeof(node_t));
+    head->next->value = 2;
 
-    printf("%d",ptr->value);
+    //sets the new node's next value to null
+    head->next->next = NULL;
 
+    print_list(head);
 
+    /*
+    //updates the current postion of our main pointer to the new pointer just created.
+    head = head->next;
+    */
 
+}
 
+void print_list(node_t* head){
+    node_t* current = head;
 
+    while(current != NULL){
+        //Prints the value at current postion
+        printf("%d\n",current->value);
+        //sets the current pointer to the next item in the linked list
+        current = current->next;
+
+    }
 
 }
