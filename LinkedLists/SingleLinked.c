@@ -2,9 +2,8 @@
 #include <stdlib.h>
 
 /*
-
-To access members of a struct use the dot operator,
-to access members of a strcut through a pointer use the arrow operator.
+-- Bugs Found --
+addEnd Function wont add a second value after adding a value to the linked list.
 
 */
 
@@ -24,6 +23,7 @@ Used https://www.learn-c.org/en/Linked_lists to learn linked list's from
 void print_list(node_t * head);
 void addEnd(node_t * head, int val);
 void addStart(node_t** head, int val);
+int removeStart(node_t ** head);
 
 int main(void){
 
@@ -41,11 +41,15 @@ int main(void){
 
     addEnd(head, 6);
     addStart(&head, 1);
-    addEnd(head, 5);
     addStart(&head, 0);
+    
+    print_list(head);
+    printf("\n");
+
+    removeStart(&head);
 
     print_list(head);
-
+    
 
     /* Code Below Was Test Code For the Structure's before implementing the functions */
     
@@ -95,4 +99,20 @@ void addStart(node_t ** head, int val) {
     new_node->value = val;
     new_node->next = *head;
     *head = new_node;
+}
+
+int removeStart(node_t ** head) {
+    int retval = 1;
+    node_t * next_node = NULL;
+
+    if(*head == NULL) {
+        return -1;
+    }
+
+    next_node = (*head)->next;
+    retval = (*head)->value;
+    free(*head);
+   *head = next_node;
+
+    return retval;
 }
