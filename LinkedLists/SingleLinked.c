@@ -12,12 +12,12 @@ addEnd Function wont add a second value after adding a value to the linked list.
 Used https://www.learn-c.org/en/Linked_lists to learn linked list's from
 */
 
-//Linked List Struct
-    typedef struct node{
-        int value;
-        struct node * next;
-    }node_t;
 
+//Linked List Struct
+typedef struct node{
+        int value;
+        struct node* next;
+    }node_t;
 
 //Function Prototypes
 void print_list(node_t * head);
@@ -37,7 +37,6 @@ int main(void){
     head->value = 2;
     head->next = NULL;
 
-    print_list(head);
 
     addEnd(head, 6);
     addStart(&head, 1);
@@ -51,7 +50,7 @@ int main(void){
     print_list(head);
     
 
-    /* Code Below Was Test Code For the Structure's before implementing the functions */
+    /* Code Below Was Test Code For the struct before implementing the functions */
     
     //Create the next node after head, by assigning the next variable to a memory location of the next structure.
     //head->next = (node_t*) malloc(sizeof(node_t));
@@ -93,7 +92,7 @@ void addEnd(node_t* head, int val) {
 }
 
 void addStart(node_t ** head, int val) {
-    node_t * new_node;
+    node_t *new_node;
     new_node = (node_t *) malloc(sizeof(node_t));
 
     new_node->value = val;
@@ -103,8 +102,9 @@ void addStart(node_t ** head, int val) {
 
 int removeStart(node_t ** head) {
     int retval = 1;
-    node_t * next_node = NULL;
+    node_t *next_node = NULL;
 
+    //Edge case to check if the head is initialized.
     if(*head == NULL) {
         return -1;
     }
@@ -115,4 +115,30 @@ int removeStart(node_t ** head) {
    *head = next_node;
 
     return retval;
+}
+
+int removeLast(node_t *head) {
+    int retval = 0;
+
+    if(head->next == NULL){
+        retval = head->value;
+        free(head);
+        return retval;
+    }
+
+    //get the second last node in the list
+    node_t* current = head;
+    while(current->next->next != NULL){
+        current = current->next;
+    }
+
+    retval = current->next->value;
+    free(current->next);
+    current->next = NULL;
+    return retval;
+}
+
+int removeIndex(node_t ** head, int n){
+
+
 }
