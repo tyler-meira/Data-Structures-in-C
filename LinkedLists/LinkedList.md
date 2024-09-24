@@ -1,6 +1,6 @@
 ** Documenting Things I learned **
 
-19/09/24
+19/09/2024
 
 Today, we started actaully implementing the Linked List Strucutre, doing so we learned about recursivly
 calling a function in a structure, this idea is the foundation of the linked list, as this is what allows
