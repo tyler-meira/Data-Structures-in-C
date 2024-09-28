@@ -35,7 +35,7 @@ int main(void){
   addEnd(head, 1);
   addEnd(head, 2);
 
-  head = addStart(head, 3);
+  head = add Start(head, 3);
 
   printf("Forward Iteration \n");
   printNodes(head);
