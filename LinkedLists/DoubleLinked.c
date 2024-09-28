@@ -14,8 +14,9 @@ typedef struct node{
 
 //Function Prototypes
 void printNodes(doubleLinked *head);
-void addEnd(doubleLinked *head, int value);
 void printNodesReverse(doubleLinked *head);
+void addEnd(doubleLinked *head, int value);
+//void addStart(doubleLinked *head, int value);
 
 int main(void){
   
@@ -59,10 +60,13 @@ void printNodesReverse(doubleLinked *head){
   doubleLinked *current = head;
   
   //Sets our current pointer to last node.
-  while(current != NULL){
+  //fixed print bud problem was that this was not pointing the pointer to the correct node
+  //and was going out of bounds.
+  while(current->next != NULL){
     current = current->next;
   }
 
+  //traverses the linked list in reverse order
   while(current != NULL){
     printf("%d, ",current->value);
     current = current->last;
@@ -84,3 +88,14 @@ void addEnd(doubleLinked *head, int value){
 
 }
 
+/*
+void addStart(doubleLinked *head, int value){
+
+  doubleLinked *newNode = head;
+
+  current->next = (doubleLinked*) malloc(sizeof(doubleLinked));
+  current->next->value = value;
+  current->next->next = NULL;
+  current->next->last = current;
+}
+*/
