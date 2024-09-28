@@ -16,7 +16,7 @@ typedef struct node{
 void printNodes(doubleLinked *head);
 void printNodesReverse(doubleLinked *head);
 void addEnd(doubleLinked *head, int value);
-//void addStart(doubleLinked *head, int value);
+doubleLinked *addStart(doubleLinked *head, int value);
 
 int main(void){
   
@@ -34,6 +34,8 @@ int main(void){
   
   addEnd(head, 1);
   addEnd(head, 2);
+
+  head = addStart(head, 3);
 
   printf("Forward Iteration \n");
   printNodes(head);
@@ -88,14 +90,15 @@ void addEnd(doubleLinked *head, int value){
 
 }
 
-/*
-void addStart(doubleLinked *head, int value){
+doubleLinked *addStart(doubleLinked *head, int value){
 
-  doubleLinked *newNode = head;
+  doubleLinked *newNode = (doubleLinked*) malloc(sizeof(doubleLinked));
+  head->last = newNode;
 
-  current->next = (doubleLinked*) malloc(sizeof(doubleLinked));
-  current->next->value = value;
-  current->next->next = NULL;
-  current->next->last = current;
+  newNode->next = head;
+  newNode->value = value;
+  newNode->last = NULL;
+
+  return newNode;
 }
-*/
+
